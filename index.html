@@ -14,32 +14,42 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .container {
             text-align: center;
-            padding: 20px;
+            max-width: 400px;
+            width: 100%;
         }
 
         .title {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            word-wrap: break-word;
         }
 
         .timer {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 10px;
-            font-size: 2.5rem;
         }
 
         .timer div {
+            flex: 1;
+            max-width: 90px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            padding: 10px 15px;
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer div h2 {
+            margin: 0;
+            font-size: 2rem;
         }
 
         .timer div span {
@@ -49,8 +59,21 @@
         }
 
         @media (max-width: 600px) {
-            .timer {
+            .title {
                 font-size: 1.5rem;
+            }
+
+            .timer div {
+                max-width: 70px;
+                padding: 8px 10px;
+            }
+
+            .timer div h2 {
+                font-size: 1.5rem;
+            }
+
+            .timer div span {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -60,19 +83,19 @@
         <h1 class="title">Countdown to Medical Admission</h1>
         <div class="timer" id="countdown">
             <div>
-                <div id="days">0</div>
+                <h2 id="days">0</h2>
                 <span>Days</span>
             </div>
             <div>
-                <div id="hours">0</div>
+                <h2 id="hours">0</h2>
                 <span>Hours</span>
             </div>
             <div>
-                <div id="minutes">0</div>
+                <h2 id="minutes">0</h2>
                 <span>Minutes</span>
             </div>
             <div>
-                <div id="seconds">0</div>
+                <h2 id="seconds">0</h2>
                 <span>Seconds</span>
             </div>
         </div>
@@ -93,8 +116,8 @@
 
             const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            const minutes = Math.floor((timeDifference % (1000 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % 1000) / 1000);
 
             document.getElementById("days").textContent = days;
             document.getElementById("hours").textContent = hours;
