@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Medical Admission</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 2.5rem;
+        }
+
+        .timer div {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer div span {
+            display: block;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .timer {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Countdown to Medical Admission</h1>
+        <div class="timer" id="countdown">
+            <div>
+                <div id="days">0</div>
+                <span>Days</span>
+            </div>
+            <div>
+                <div id="hours">0</div>
+                <span>Hours</span>
+            </div>
+            <div>
+                <div id="minutes">0</div>
+                <span>Minutes</span>
+            </div>
+            <div>
+                <div id="seconds">0</div>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const targetDate = new Date("2025-01-17T00:00:00");
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = targetDate - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById("countdown").innerHTML = "<h2>It's Time!</h2>";
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
